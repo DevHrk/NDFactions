@@ -1,0 +1,282 @@
+Mysql:
+  SQLLite: true
+  IP: "localhost"
+  Porta: "3306"
+  DB: "test"
+  Usuario: "admin"
+  Senha: ""
+
+Padrao:
+  PoderInicial: 5
+  PoderMaxInicial: 5
+  PoderMaxLimite: 15
+  MaximoMembrosEmFac: 15
+  MaximoHomesPorFac: 5
+
+Geral:
+  TempoParaRecuperarPoder: 10 #Em 10 minutos, o player recupera um de poder
+  PerderPoderPorMorte: 1
+  ProtegerTemporariamentePreco: 20000
+  TempoDeProtecaoTemporaria: 20 #Em minutos
+  SpawnerCoordenadas: 100000
+
+Mensagens:
+  Ajuda:
+    ComFac:
+      - "&2Comandos disponíveis: "
+      - ""
+      - "&a/f abandonar &8-&7 Abandonar terras"
+      - "&a/f base &8-&7 Utilize para ir at� a base de sua facção"
+      - "&a/f convidar <jogador> &8-&7 Utilize para enviar convites de facções"
+      - "&a/f desfazer &8-&7 Utilize para terminar sua facção"
+      - "&a/f expulsar <jogador> &8-&7 Utilize para expulsar membros da sua facção"
+      - "&a/f info <tag> &8-&7 Utilize para ver informações sobre uma facção"
+      - "&a/f listar &8-&7 Utilize para ver todas as facções online"
+      - "&a/f mapa &8-&7 Utilize para ver o mapa"
+      - "&a/f membros <tag> &8-&7 Utilize para listar membros de uma facção"
+      - "&a/f perfil <jogador> &8-&7 Mostrar as informações de um jogador"
+      - "&a/f proteger &8-&7 Utilize para proteger um terreno temporiamente"
+      - "&a/f rebaixar <jogador> &8-&7 Rebaixar um jogador"
+      - "&a/f relacao <facção> &8-&7 Gerenciar relações com outras facções"
+      - "&a/f sair &8-&7 Utilize para abandonar sua facção"
+      - "&a/f transferir <jogador> &8-&7 Transfira a lideran�a da facção para outro jogador"
+      - "&a/f verterras &8-&7 Mostrar as delimitações das terras"
+    SemFac:
+      - "&2Comandos disponíveis: "
+      - ""
+      - "&a/f aceitar convite <tag> &8-&7 Utilize para aceitar convites de facções"
+      - "&a/f convites &8-&7 Utilize para ver seus convites de facções"
+      - "&a/f criar <tag> <nome> &8-&7 Crie sua própria facção"
+      - "&a/f info <tag> &8-&7 Utilize para ver informações sobre uma facção"
+      - "&a/f listar &8-&7 Utilize para ver todas as facções online"
+      - "&a/f membros <tag> &8-&7 Utilize para listar membros de uma facção"
+      - "&a/f perfil <jogador> &8-&7 Mostrar as informações de um jogador"
+      - "&a/f verterras &8-&7 Mostrar as delimitações das terras"
+  SemPermissao: "&cVocê não tem permissão para usar este comando."
+  SemFac: "&cVocê precisa de uma facção para executar este comando"
+  UsuarioNaoExiste: "&cEste usuário não existe"
+  ArgsInsuficientes: "&cUtilize <comando>"
+  TagGrande: "&cA tag da facção deve conter 3 caracteres"
+  NomeGrande: "&cO nome de sua facção deve conter de 5 a 20 caracteres"
+  JaExisteTag: "&cOps! Já existe outra facção utilizando a tag <tag>"
+  JaExisteNome: "&cJá existe outra facção utilizando o nome <nome>"
+  FacCriada: "&eYAY! Sua facção foi criada com sucesso!"
+  FacNaoExiste: "&cOps! A facção informada não existe!"
+  SemConvite: "&cOxi! Você não foi convidado para entrar na facção <tag>"
+  EntrouFac: "&eYAY! Você entrou na facção &f<tag>"
+  EntrouNaFac: "&eYAY! <jogador> entrou na sua facção"
+  NaoEstaOnline: "&cO jogador <jogador> não está online!"
+  JogadorEntrou: "&a<jogador> entrou no servidor"
+  JogadorSaiu: "&e<jogador> saiu do servidor"
+  JaTemFac: "&cO jogador <jogador> já faz parte de outra facção"
+  ConviteEnviado: "&eVocê convidou &f<jogador>&e para a sua facção."
+  FoiConvidado: "&eVocê foi convidado para a facção <nome>"
+  MaxMembros: "&cSua facção atingiu o limite máximo de membros"
+  SemConvites: "&cVocê não possui nenhum convite pendente."
+  JaConvidou: "&cVocê já convidou <jogador> para sua facção"
+  NaoPodeSair: "&cO líder da facção não pode abandoná-la. Caso queira deletá-la, utilize /f desfazer."
+  AlguemSaiu: "&cO jogador <jogador> saiu da sua facção"
+  VoceSaiu: "&aVocê saiu da facção <nome>"
+  SemCargo: "&cVocê não pode fazer isso com o cargo de <cargo>"
+  FaccoesPertos: "&cAs seguintes facções estão próximas: <nomes>. Portanto não foi possivel dominar esta terra."
+  SemPoderDominar: "&cSua facção não tem poder suficiente para domminar esta terra."
+  TerraDominada: "&aVocê dominou esta terra com sucesso."
+  JaDominada: "&aEsta terra já está dominada por sua facção!"
+  FaccaoDesfeita: "&aA facção <nome> foi terminada com sucesso!"
+  FaccaoFoiDesfeita: "&aO líder <lider> terminou a facção <nome>"
+  NaoEstaNaFac: "&cEsse jogador não faz parte da sua facção."
+  NaoPodeSeExpulsar: "&cErr.. Você não pode se auto-expulsar de sua facção!"
+  NaoPodeSePromover: "&cErr.. Você não pode alterar seu próprio cargo na facção"
+  NaoPodeExpulsar: "&cVocê não pode expulsar este jogador. Aparentemente o nível de permissão dele é igual ou superior ao seu!"
+  JogadorExpulso: "&aO jogador <jogador> foi expulso de sua facção!"
+  AtivarVerTerras: "&aVocê ativou o modo ver delimitações das terras."
+  DesativarVerTerras: "&cVocê desativou o modo ver delimitações das terras."
+  JogadorPromovido: "&aVocê promoveu <jogador> para o cargo <cargo>"
+  VoceFoiPromovido: "&eVocê foi promovido para o cargo <cargo> por <jogador>"
+  JogadorRebaixado: "&aVocê rebaixou <jogador> para o cargo <cargo>"
+  VoceFoiRebaixado: "&cVocê foi rebaixado para o cargo <cargo> por <jogador>"
+  NaoPodeRebaixar: "&cVocê não pode rebaixar o jogador <jogador> pois ele já está no cargo recruta"
+  LiderencaTransferida: "&e<lider> transferiu a liderança da sua facção para <novolider>"
+  SemBase: "&cHum... Sua facção ainda não está com sua base definida"
+  NaoPodeSetarBase: "&cVocê só pode definir bases dentro das terras da sua facção."
+  BaseSetada: "&aLocalização da base alterada com sucesso."
+  BaseRemovida: "&aBase removida com sucesso."
+  TeleportadoParaBase: "&aTeleportado para a base de sua facção!"
+  NaoPodeRelacao: "&cNão é possivel definir uma relação com sua própria facção."
+  LiderNaoON: "&cO lider da facção <nome> precisa estar online para aceitar esse pedido."
+  PedidoEnviado: "&eUm pedido de <relacao>&e foi enviado para &f[<tag>]"
+  PedidoRecebido: "&eVocê recebeu uma proposta de <relacao>&e da facção &f[<tag>]"
+  SemRelacoes: "&cSua facção não possui relações no momento."
+  NaoPodeAbandonar: "&eEsta terra não partence a você."
+  TerraAbandonada: "&aTerra abandonada com sucesso."
+  NaoPodeProteger: "&aVocê só pode proteger terrenos livres."
+  SemDinheiro: "&cVocê precisa de 20000 coins para proteger este terreno temporariamente"
+  TerrenoExpirou: "&eUm dos seus terrenos temporários expirou"
+  SemTerras: "&cSua facção não possui nenhum terreno."
+  TerrasAbandonas: "&cVocê abandonou todas suas terras."
+  NaoPodeVoar: "&eVocê só pode ativar fly em territórios de sua facção ou territórios aliados."
+  FlyAtivado: "&eVocê <ativou> seu fly com sucesso"
+  ComandoInvalido: '&cComando invalido digite /f ajuda'
+  PontoSpawnDefinido: "&aPonto de spawn definido para &f<mobType> &ana sua localização atual."
+  PontoSpawnRemovido: "&aPonto de spawn removido para &f<mobType> &aneste chunk."
+  NenhumPontoSpawn: "&cNenhum ponto de spawn definido para &f<mobType> &cneste chunk."
+  TerraNaoPertence: "&cEsta terra não pertence à sua facção."
+  MobTypeInvalido: "&cTipo de mob inválido: &f<mobType>."
+  NenhumSpawner: "&cNão há spawners neste chunk."
+  NaoEmFaccao: "&cVocê não está em uma facção."
+  PermissaoInsuficiente: "&cVocê precisa ser Líder ou Capitão para gerenciar pontos de spawn."
+  GraceAtivado: "§aGrace ativado."
+  GraceExpirado: "§cGrace Desativado."
+  GraceGlobalAtivado: "§aO servidor está em período de grace por <horas> horas. Nenhum combate ou invasão será permitido."
+  GraceGlobalExpirado: "§cO período de grace do servidor expirou."
+  CombateBloqueado: "§cNão é possível iniciar combate enquanto o servidor ou uma das facções está em período de graça."
+  SobAtaqueToggled: "§eO estado 'sob ataque' foi <status> para sua facção."
+  SemFaccao: '&cVocê não possui facção para colocar este gerador.'
+  SemRoster: '&cVocê não está no roster de nenhuma facção.'
+  NaoPodeColocarSpawnerProtecaoTemporaria: "&cVocê não pode colocar spawners em territórios com proteção temporária."
+  SpawnerNaoAdjacente: "&cVocê deve colocar spawners um ao lado do outro do mesmo tipo."
+  SpawnerAdjacenteIgual: "§cVocê deve colocar spawners um ao lado do outro de mesmo tipo no território."
+  NaoPossuiFaccao: "&cVocê não possui uma facção."
+  SpawnerAcimaY150: "&cFacções com mais de 40 claims não podem colocar spawners acima de Y=150."
+  JogadorMorto: "&e<tag> <assassino> &7matou &e<vitima>&7!"
+  CreeperMorto: "&e<tag> <jogador> &7matou um Creeper!"
+  FaccaoTaxada: "&eFacção <tag> taxada em <porcentagem>%"
+  TaxaDevolvida: "&eTaxa da <tag> devolvida em <porcentagem>%"
+  SpawnerBreakDelay: "§cVocê não pode quebrar spawners agora. Aguarde <minutos> minutos e <segundos> segundos."
+  DuranteInvasao: "§cVocê não pode colocar blocos protegidos durante uma invasão!"
+  NaoPodeInvasao: "§cVocê não pode fazer isso durante uma invasão!"
+  InvasaoDurouMuito: "§aA facção <tag> recebeu 30 minutos de imunidade após 2 horas de ataque!"
+  SemTerritorioSpawner: '§cVocê não pode quebrar esté spawner.'
+  SemPermissaoTerritorio: '§cVocê não pode colocar spawners fora de seu territorio'
+
+Top:
+  Spawners: #Valor dos spawners vale para o armazenados tbm
+    COW: 50000
+    SPIDER: 100000
+    ZOMBIE: 15000
+    SKELETON: 200000
+    BLAZE: 500000
+    PIG_ZOMBIE: 750000
+    IRON_GOLEM: 1000000
+
+#Scoreboard
+Atualizacao: 10 #Tempo de atualizar a scoreboard em segundos
+EmAttack: '&c☣'
+ScoreBoard:
+  Title: '{zona}' #Em mundo Recomendo que você troque o nome dos mundos na hora de criar o mapa!!
+  ComFac:
+    - '&a'
+    - ' &fNível: &a{mcmmo}'
+    - ' &fPoder: &a{power}&f/&a{powermax}'
+    - '&b'
+    - ' {attack}&e[{tag}] {faction}'
+    - '  &fOnline: &e{online}/{facmembers}'
+    - '  &fPoder: &e{powerfac}/{powerfacmax}'
+    - '  &fTerras: &e{terras}'
+    - '  &fSob-Ataque: &e{tempoattack}'
+    - '&c'
+    - ' &fCoins: &a$&f{money}'
+    - ' &fCash: &6#&f{factions_cash}'
+    - '&1'
+    - '&eFEITO POR NDDEV'
+  SemFac:
+    - '&e'
+    - ' &fNível: &a{mcmmo}'
+    - ' &fPoder: &a{power}&f/&a{powermax}'
+    - '&v'
+    - '  &7Sem facção.'
+    - '&d'
+    - ' &fCoins: &a$&f{money}'
+    - ' &fCash: &6#&f{factions_cash}'
+    - '&q'
+    - '&eFEITO POR NDDEV'
+MundosD: #Em que a score funcionarar!
+  - world
+Mundos:
+  Mineracao: "mina"
+  Padrao: "mundo"
+  VIP: "vip"
+
+SobAtaque:
+  Mensagem: "&cSua base está sendo invadida"
+  BloquearQuebrarBlocos: #Id dos itens que não podem ser quebrados durante invasóo
+    - "138"
+    - "52"
+
+#Formata o cash eo money
+#Formata apenas na scoreboard!!
+Formatação:
+  - ''
+  - 'k'
+  - 'M'
+  - 'B'
+  - 'T'
+  - 'Q'
+  - 'QQ'
+  - 'S'
+  - 'SS'
+  - 'OC'
+  - 'N'
+  - 'D'
+  - 'UN'
+  - 'DD'
+  - 'TR'
+  - 'QT'
+  - 'QN'
+  - 'SD'
+  - 'SPD'
+  - 'OD'
+  - 'ND'
+  - 'VG'
+  - 'UVG'
+  - 'DVG'
+  - 'TVG'
+  - 'QTV'
+  - 'QNV'
+  - 'SEV'
+  - 'SPV'
+  - 'OVG'
+  - 'NVG'
+  - 'TG'
+
+#[%nd_faction_faction_name%] - pega o nome da fac
+#[%nd_faction_faction_tagtab%] - pega a tag da fac no tab
+#[%nd_faction_faction_tag%] - pega a tag da fac
+
+#[%nd_faction_faction_leader%] - pega o lider da facção
+#[%nd_faction_faction_members_count%] - pega o número de membros da facção
+#[%nd_faction_faction_online_members_count%] - pega o número de membros online da facção
+#[%nd_faction_faction_online_captains_count%] - pega o número de capitões online
+#[%nd_faction_faction_online_members_only_count%]
+#[%nd_faction_faction_online_power%] - pega o poder
+
+#[%nd_faction_faction_online_max_power%] - pega o poder máximo
+#[%nd_faction_faction_online_territories_count%] - pega os territorios
+
+#[%nd_faction_faction_online_recruits_count%] - pega os recrutas da facção
+
+#[%nd_faction_faction_online_kdr%] - pega o kdr
+#[%nd_faction_faction_online_spawners_money%] - pega o money dos spawners
+#[%nd_faction_faction_online_total_money%] - pega o money total da facção
+#[%nd_faction_faction_online_stored_generators%] - pega o numero de geradores armazenados
+#[%nd_faction_faction_online_placed_generators%] - pega o numero de spawners colocados
+#[%nd_faction_faction_online_placed_generators_per_type%] - pega o numero de spawners de cada tipo
+#[%nd_faction_faction_online_total_spawners_money%] - pega o money total de spawner colocado e armazenado
+#[%nd_faction_faction_online_under_attack%] - pega se a fac está sobattack
+#[%nd_faction_faction_online_max_members%] - pega o número máximo de membros.
+
+
+#PERMISSOES
+#FLY:
+#Permissão normal 'nd.commands.factions.fly.allyown'
+#Permissão zona protegida 'nd.commands.factions.fly.protected'
+#Permissão total 'nd.commands.factions.fly'
+
+#ADMIN:
+#PEGAR MEMBROS: 'nd.commands.factions.cmembroplus'
+#PEGAR PODER: 'nd.commands.factions.cpower'
+#GRACE: 'nd.admin.grace'
+#FADMIN: 'nd.admin.fadmin'
+#TOGGLE: nd.admin.togglesobataque
+#FSTAXAR: 'nd.admin.taxar'
+#FSDEVOLVERTAXA: 'nd.admin.devolvertaxa'

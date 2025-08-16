@@ -1,0 +1,24 @@
+name: NDFactions
+main: me.nd.factions.Main
+version: 1.0
+depend: [Vault, PlaceholderAPI]
+api-version: '1.13'
+commands:
+  f:
+  fs:
+  cpower:
+  cmembroplus:
+  .:
+  a:
+  s:
+  grace:
+  togglesobataque:
+  sgive:
+permissions:
+  nd.admin.grace:
+    description: Permite usar o comando /grace
+    default: op
+  nd.admin.togglesobataque:
+    description: Permite usar o comando /togglesobataque
+    default: op
+
