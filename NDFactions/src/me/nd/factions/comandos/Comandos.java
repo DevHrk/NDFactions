@@ -270,6 +270,45 @@ public class Comandos implements CommandExecutor {
 	    }
 	}
 	
+    public static boolean create(NDPlayer dplayer, String name, String tag) {
+        Player player = dplayer.getPlayer();
+        if (dplayer.hasFaction()) {
+            player.sendMessage(Config.get("Mensagens.SemPermissao").toString().replace("&", "§").replace("<nome>", name));
+            return false;
+        }
+        if (tag.length() != 3) {
+            player.sendMessage(Config.get("Mensagens.TagGrande").toString().replace("&", "§"));
+            return false;
+        }
+        if (name.length() < 5 || name.length() > 16) {
+            player.sendMessage(Config.get("Mensagens.NomeGrande").toString().replace("&", "§"));
+            return false;
+        }
+        if (Utils.isTagTaken(tag)) {
+            player.sendMessage(Config.get("Mensagens.JaExisteTag").toString().replace("&", "§").replace("<tag>", tag));
+            return false;
+        }
+        if (Utils.isNameTaken(name)) {
+            player.sendMessage(Config.get("Mensagens.JaExisteNome").toString().replace("&", "§").replace("<nome>", name));
+            return false;
+        }
+        if (Utils.containsSpecialCharacter(tag) || Utils.containsSpecialCharacter(name)) {
+            player.sendMessage("§cA tag/nome da facção não pode conter caracteres especiais");
+            return false;
+        }
+
+        player.sendMessage(Config.get("Mensagens.FacCriada").toString().replace("&", "§"));
+        NDFaction faction = new NDFaction(name, null, 0, new ArrayList<>(), new ArrayList<>(), 
+                dplayer.getNome(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), tag, new ArrayList<>());
+        
+        dplayer.setFaction(faction);
+        DataManager.factions.put(name, faction);
+
+        doFactionPlayerChangeFaction event = new doFactionPlayerChangeFaction(dplayer, Motivo.CRIAR);
+        Bukkit.getPluginManager().callEvent(event);
+        return false;
+    }
+	
 	private boolean ataque(NDPlayer dplayer, String tag) {
 	    Player player = dplayer.getPlayer();
 	    NDFaction faction;
@@ -2550,45 +2589,6 @@ public class Comandos implements CommandExecutor {
         }
 
         return item.toItemStack();
-    }
-
-    public static boolean create(NDPlayer dplayer, String name, String tag) {
-        Player player = dplayer.getPlayer();
-        if (dplayer.hasFaction()) {
-            player.sendMessage(Config.get("Mensagens.SemPermissao").toString().replace("&", "§").replace("<nome>", name));
-            return false;
-        }
-        if (tag.length() != 3) {
-            player.sendMessage(Config.get("Mensagens.TagGrande").toString().replace("&", "§"));
-            return false;
-        }
-        if (name.length() < 5 || name.length() > 16) {
-            player.sendMessage(Config.get("Mensagens.NomeGrande").toString().replace("&", "§"));
-            return false;
-        }
-        if (Utils.isTagTaken(tag)) {
-            player.sendMessage(Config.get("Mensagens.JaExisteTag").toString().replace("&", "§").replace("<tag>", tag));
-            return false;
-        }
-        if (Utils.isNameTaken(name)) {
-            player.sendMessage(Config.get("Mensagens.JaExisteNome").toString().replace("&", "§").replace("<nome>", name));
-            return false;
-        }
-        if (Utils.containsSpecialCharacter(tag) || Utils.containsSpecialCharacter(name)) {
-            player.sendMessage("§cA tag/nome da facção não pode conter caracteres especiais");
-            return false;
-        }
-
-        player.sendMessage(Config.get("Mensagens.FacCriada").toString().replace("&", "§"));
-        NDFaction faction = new NDFaction(name, null, 0, new ArrayList<>(), new ArrayList<>(), 
-                dplayer.getNome(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), tag, new ArrayList<>());
-        
-        dplayer.setFaction(faction);
-        DataManager.factions.put(name, faction);
-
-        doFactionPlayerChangeFaction event = new doFactionPlayerChangeFaction(dplayer, Motivo.CRIAR);
-        Bukkit.getPluginManager().callEvent(event);
-        return false;
     }
 
     private boolean convidar(NDPlayer inviter, String targetName) {

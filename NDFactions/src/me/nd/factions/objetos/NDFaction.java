@@ -69,6 +69,63 @@ public class NDFaction {
     private int successfulInvasions; // Tracks the number of successful invasions
     private Map<EntityType, Integer> destroyedSpawners; // Tracks spawners destroyed during invasio
     
+    public NDFaction(String nome, Location base, double banco, List<Terra> terras, List<String> aliados,
+                     String lider, List<String> capitoes, List<String> membros, List<String> recrutas, String tag,
+                     List<String> inimigos) {
+        this.nome = nome;
+        this.base = base;
+        this.banco = banco;
+        this.terras = terras;
+        this.aliados = aliados;
+        this.lider = lider;
+        this.capitoes = capitoes;
+        this.membros = membros;
+        this.recrutas = recrutas;
+        this.tag = tag != null ? tag : nome;
+        this.inimigos = inimigos;
+        this.pedidos = new ArrayList<>();
+        this.pedidos3 = new ArrayList<>();
+        this.temporarios = new ArrayList<>();
+        this.permissoes = new HashMap<>();
+        this.permissoesRelacoes = new HashMap<>();
+        this.permissoesMembros = new HashMap<>();
+        this.homes = new HashMap<>();
+        this.placedGenerators = new HashMap<>();
+        this.storedGenerators = new HashMap<>();
+        this.successfulInvasions = 0;
+        this.destroyedSpawners = new HashMap<>();
+        setupPermissoes();
+    }
+    
+    private void setupPermissoes() {
+        for (Cargo cargo : new Cargo[]{Cargo.Recruta, Cargo.Membro, Cargo.Capitão}) {
+            Map<String, Boolean> cargoPerms = new HashMap<>();
+            cargoPerms.put("abrir_bau", false);
+            cargoPerms.put("abrir_porta", false);
+            cargoPerms.put("apertar_botao", false);
+            cargoPerms.put("teleportar", false);
+            cargoPerms.put("colocar_bloco", false);
+            cargoPerms.put("quebrar_bloco", false);
+            permissoes.put(cargo, cargoPerms);
+        }
+
+        for (Relacao relacao : new Relacao[]{Relacao.Aliada, Relacao.Neutra, Relacao.Inimiga}) {
+            Map<String, Boolean> relacaoPerms = new HashMap<>();
+            relacaoPerms.put("abrir_bau", false);
+            relacaoPerms.put("abrir_porta", false);
+            relacaoPerms.put("apertar_botao", false);
+            relacaoPerms.put("teleportar", false);
+            relacaoPerms.put("colocar_bloco", false);
+            relacaoPerms.put("quebrar_bloco", false);
+            permissoesRelacoes.put(relacao, relacaoPerms);
+        }
+
+        for (String member : getAllMembers()) {
+            Map<String, Boolean> memberPerms = new HashMap<>();
+            permissoesMembros.put(member, memberPerms);
+        }
+    }
+    
     public static class GeneratorLog {
         private final String playerName;
         private final String action;
@@ -140,63 +197,6 @@ public class NDFaction {
         public double getMoneyDeducted() { return moneyDeducted; }
         public Map<EntityType, Integer> getSpawnersDeducted() { return spawnersDeducted; }
         public boolean isSuccess() { return success; }
-    }
-
-    public NDFaction(String nome, Location base, double banco, List<Terra> terras, List<String> aliados,
-                     String lider, List<String> capitoes, List<String> membros, List<String> recrutas, String tag,
-                     List<String> inimigos) {
-        this.nome = nome;
-        this.base = base;
-        this.banco = banco;
-        this.terras = terras;
-        this.aliados = aliados;
-        this.lider = lider;
-        this.capitoes = capitoes;
-        this.membros = membros;
-        this.recrutas = recrutas;
-        this.tag = tag != null ? tag : nome;
-        this.inimigos = inimigos;
-        this.pedidos = new ArrayList<>();
-        this.pedidos3 = new ArrayList<>();
-        this.temporarios = new ArrayList<>();
-        this.permissoes = new HashMap<>();
-        this.permissoesRelacoes = new HashMap<>();
-        this.permissoesMembros = new HashMap<>();
-        this.homes = new HashMap<>();
-        this.placedGenerators = new HashMap<>();
-        this.storedGenerators = new HashMap<>();
-        this.successfulInvasions = 0;
-        this.destroyedSpawners = new HashMap<>();
-        setupPermissoes();
-    }
-    
-    private void setupPermissoes() {
-        for (Cargo cargo : new Cargo[]{Cargo.Recruta, Cargo.Membro, Cargo.Capitão}) {
-            Map<String, Boolean> cargoPerms = new HashMap<>();
-            cargoPerms.put("abrir_bau", false);
-            cargoPerms.put("abrir_porta", false);
-            cargoPerms.put("apertar_botao", false);
-            cargoPerms.put("teleportar", false);
-            cargoPerms.put("colocar_bloco", false);
-            cargoPerms.put("quebrar_bloco", false);
-            permissoes.put(cargo, cargoPerms);
-        }
-
-        for (Relacao relacao : new Relacao[]{Relacao.Aliada, Relacao.Neutra, Relacao.Inimiga}) {
-            Map<String, Boolean> relacaoPerms = new HashMap<>();
-            relacaoPerms.put("abrir_bau", false);
-            relacaoPerms.put("abrir_porta", false);
-            relacaoPerms.put("apertar_botao", false);
-            relacaoPerms.put("teleportar", false);
-            relacaoPerms.put("colocar_bloco", false);
-            relacaoPerms.put("quebrar_bloco", false);
-            permissoesRelacoes.put(relacao, relacaoPerms);
-        }
-
-        for (String member : getAllMembers()) {
-            Map<String, Boolean> memberPerms = new HashMap<>();
-            permissoesMembros.put(member, memberPerms);
-        }
     }
     
     public int getSuccessfulInvasions() {
@@ -1222,7 +1222,7 @@ public class NDFaction {
 
     public String getNome() {
         if (getTag() != null && !getTag().isEmpty()) {
-            return nome.replaceFirst("(?i)" + Pattern.quote(getTag()) + "\\s*", "");
+            return nome.replaceFirst("(?i)" + Pattern.quote(getTag()) + "\\s+", "");
         }
         return nome;
     }

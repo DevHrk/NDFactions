@@ -15,6 +15,10 @@ Padrao:
 
 Tregua:
   Duracao: 1800000 # Tempo {minuto} * 60 * 1000
+  
+BloquearComandos: #Bloqueia Comandos no territorio inimigo
+  - "home"
+  - "sethome"
 
 Geral:
  TempoParaRecuperarPoder: 10 #Em 10 minutos, o player recupera um de poder
@@ -64,6 +68,7 @@ Mensagens:
    - "&a/f roster &8-&7 Veja as facções que você tem acesso"
    - "&a/f ataque <tag> &8-&7 Veja o status de ataque de uma facção"
    - "&a/f geradores listar <tag> &8-&7 Veja geradores de outras facções"
+ ComandoBloqueado: "&cVocê não pode usar este comando em território de <relacao>!"
  SemPermissao: "&cVocê não tem permissão para usar este comando."
  SemFac: "&cVocê precisa de uma facção para executar este comando"
  UsuarioNaoExiste: "&cEste usuário não existe"

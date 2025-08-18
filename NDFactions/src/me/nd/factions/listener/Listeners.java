@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 
 import me.nd.factions.Main;
+import me.nd.factions.addons.BlockCommands;
 import me.nd.factions.addons.MembroPlus;
 import me.nd.factions.addons.OfferManager;
 import me.nd.factions.addons.Poder;
@@ -46,6 +47,7 @@ public class Listeners {
 				FactionsInvite.class,
 				MenusListeners.class,
 				OfferManager.class,
+				BlockCommands.class,
 				HomeListener.class);
 		// Registre todos os listeners em um loop
 		

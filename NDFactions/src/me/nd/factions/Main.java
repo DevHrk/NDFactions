@@ -36,7 +36,6 @@ public class Main extends JavaPlugin {
         MySQL.open();
         
         loadData();
-
         Score.register();
         Listeners.setupListeners();
         registerCommands();
@@ -44,22 +43,6 @@ public class Main extends JavaPlugin {
         
         Board.start();
         getLogger().info("[NDFactions] iniciado com sucesso.");
-        
-        DataManager.extraMemberSlotsFile = new File(this.getDataFolder(), "extra_member_slots.yml");
-        DataManager.extraMemberSlotsConfig = YamlConfiguration.loadConfiguration(DataManager.extraMemberSlotsFile);
-        DataManager.loadExtraMemberSlots();
-        
-        DataManager.initSpawnPointsFile();
-        
-        DataManager.initHomesFile();
-        
-        DataManager.initVaultsFile();
-        
-        DataManager.initFactionDataFile();
-        
-        DataManager.initOffersFile();
-        
-        DataManager.initRostersFile();
         
         setupEconomy();
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -128,6 +111,15 @@ public class Main extends JavaPlugin {
     }
     
     private void loadData() {
+        DataManager.extraMemberSlotsFile = new File(this.getDataFolder(), "extra_member_slots.yml");
+        DataManager.extraMemberSlotsConfig = YamlConfiguration.loadConfiguration(DataManager.extraMemberSlotsFile);
+        DataManager.loadExtraMemberSlots();
+        DataManager.initSpawnPointsFile();
+        DataManager.initHomesFile();
+        DataManager.initVaultsFile();
+        DataManager.initFactionDataFile();
+        DataManager.initOffersFile();
+        DataManager.initRostersFile();
         long start = System.currentTimeMillis();
 
         int loadedPlayers = 0;
@@ -153,6 +145,7 @@ public class Main extends JavaPlugin {
         long duration = (System.currentTimeMillis() - start) / 1000;
         getLogger().info("Carregados " + loadedPlayers + " jogadores em " + duration + "s");
         getLogger().info("Carregadas " + loadedFactions + " facções em " + duration + "s");
+
     }
 
     private void registerCommands() {
