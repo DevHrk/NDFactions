@@ -22,8 +22,6 @@ public class BlockCommands implements Listener {
     private final static String blockMessage;
     static FileConfiguration config = Main.get().getConfig();
     static {
-        // Register the listener
-        // Load blocked commands from config
         
         blockedCommands = config.getStringList("BloquearComandos");
         blockMessage = config.getString("Mensagens.ComandoBloqueado", "&cVocê não pode usar este comando em território de facção!");

@@ -76,31 +76,40 @@ public class FactionSetSpawn implements Listener {
 	    Chunk chunk = customSpawnPoint.getChunk();
 	    if (!chunk.isLoaded()) chunk.load();
 
-	    final int MAX_STACK = 25;
-	    Entity stackable = null;
-	    int currentAmount = 0;
+	    final int MAX_STACK = 100;
 
-	    for (Entity nearby : customSpawnPoint.getWorld().getNearbyEntities(customSpawnPoint, 3, 3, 3)) {
-	        if (!nearby.isValid() || nearby.isDead()) continue;
+	    // Procurar melhor mob para stackar
+	    LivingEntity bestCandidate = null;
+	    int bestAmount = 0;
+	    double closest = Double.MAX_VALUE;
+
+	    for (Entity nearby : customSpawnPoint.getWorld().getNearbyEntities(customSpawnPoint, 4, 4, 4)) {
+	        if (!(nearby instanceof LivingEntity)) continue;
+	        if (nearby.isDead() || !nearby.isValid()) continue;
 	        if (nearby.getType() != mobType) continue;
 	        if (!nearby.hasMetadata("NDFactionSpawned")) continue;
 
 	        int amount = nearby.hasMetadata("StackAmount") ? nearby.getMetadata("StackAmount").get(0).asInt() : 1;
 	        if (amount >= MAX_STACK) continue;
 
-	        stackable = nearby;
-	        currentAmount = amount;
-	        break;
+	        double dist = nearby.getLocation().distanceSquared(customSpawnPoint);
+	        if (dist < closest) {
+	            closest = dist;
+	            bestCandidate = (LivingEntity) nearby;
+	            bestAmount = amount;
+	        }
 	    }
 
-	    if (stackable != null) {
-	        int newAmount = currentAmount + 1;
-	        stackable.setMetadata("StackAmount", new FixedMetadataValue(Main.get(), newAmount));
-	        stackable.setCustomName("§e" + newAmount + "x " + formatMobName(mobType));
-	        stackable.setCustomNameVisible(true);
+	    // Se achou um candidato para stackar
+	    if (bestCandidate != null) {
+	        int newAmount = Math.min(bestAmount + 1, MAX_STACK);
+	        bestCandidate.setMetadata("StackAmount", new FixedMetadataValue(Main.get(), newAmount));
+	        bestCandidate.setCustomName("§e" + newAmount + "x " + formatMobName(mobType));
+	        bestCandidate.setCustomNameVisible(true);
 	        return;
 	    }
 
+	    // Se não achou, spawna um novo
 	    try {
 	        Entity entity = customSpawnPoint.getWorld().spawnEntity(customSpawnPoint, mobType);
 	        entity.setMetadata("NDFactionSpawned", new FixedMetadataValue(Main.get(), true));
@@ -115,6 +124,7 @@ public class FactionSetSpawn implements Listener {
 	        Bukkit.getLogger().warning("[NDFaction] Erro ao spawnar entidade: " + ex.getMessage());
 	    }
 	}
+
 
     @EventHandler
     public void onMobDeath(EntityDeathEvent event) {
